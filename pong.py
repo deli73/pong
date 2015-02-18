@@ -119,25 +119,6 @@ def checkForScore(score,rect):
 		score[0] += 1
 		resetBall(rect,-1)
 	return score
-	
-
-def updatePPaddle(paddle):
-	for event in pygame.event.get(MOUSEMOTION):
-		paddle.centery = event.pos[1]
-	return paddle
-
-def updateCPaddle(paddle, rect):
-	global cPaddleSpeed
-
-	if ENEMYAI == 0:
-		pass		#enemy level 0 doesn't move
-
-	if ENEMYAI == 1:
-		paddle.y += cPaddleSpeed
-		if paddle.y < 0 or paddle.bottom > WHEIGHT: #hits the top or bottom
-			cPaddleSpeed *= -1
-
-	return paddle
 
 def resetBall(rect,direction):
 	global v
@@ -152,6 +133,27 @@ def resetBall(rect,direction):
 
 	pygame.time.delay(1000)
 	v = ((BSPEED * direction),random.choice((-BSPEED,BSPEED)))
+
+def updatePPaddle(paddle):
+	for event in pygame.event.get(MOUSEMOTION):
+		paddle.centery = event.pos[1]
+	return paddle
+
+#=====ENEMY AI=====#
+def updateCPaddle(paddle, rect):
+	global cPaddleSpeed
+
+	if ENEMYAI == 0:
+		pass		#enemy level 0 doesn't move
+
+	if ENEMYAI == 1:
+		paddle.y += cPaddleSpeed
+		if paddle.y < 0 or paddle.bottom > WHEIGHT: #hits the top or bottom
+			cPaddleSpeed *= -1
+
+	return paddle
+
+
 
 if __name__ == '__main__':
 	main()
